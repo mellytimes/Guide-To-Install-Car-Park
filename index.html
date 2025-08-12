@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Parking Web Application - Project Showcase</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- 
+        Chosen Palette: Modern Tech (Tailwind Slate)
+        Application Structure Plan: The application is structured as a single-page project showcase. The original README content is reorganized into thematic, interactive sections to improve user engagement and information discovery. The flow is: Hero > Features > Tech Stack > Setup Guide > Contributing/License. A sticky navigation bar allows users to easily jump between sections. This structure transforms a static document into a dynamic and exploratory experience, which is more user-friendly for developers and stakeholders reviewing the project.
+        Visualization & Content Choices: 
+        - Report Info: Project Title/Intro -> Goal: Inform/Engage -> Viz/Method: Hero section with animated text -> Interaction: None -> Justification: Creates a strong first impression.
+        - Report Info: Features List -> Goal: Inform/Engage -> Viz/Method: Interactive cards with icons -> Interaction: Click to reveal details -> Justification: More engaging than a bulleted list, encourages interaction.
+        - Report Info: Tech Stack -> Goal: Inform -> Viz/Method: Grid of tech badges -> Interaction: Hover for tooltips -> Justification: Visually appealing and provides context on demand.
+        - Report Info: Getting Started -> Goal: Guide -> Viz/Method: Accordion component with copy-to-clipboard buttons -> Interaction: Click to expand steps, click to copy code -> Justification: Organizes a complex process cleanly and improves usability.
+        - Report Info: Contributing/License -> Goal: Inform -> Viz/Method: Cleanly styled text sections -> Interaction: None -> Justification: Simple, clear presentation for important but static information.
+        CONFIRMATION: NO SVG graphics used. NO Mermaid JS used.
+    -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        .feature-card .details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+        .feature-card.open .details {
+            max-height: 200px; /* Adjust as needed */
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+        .accordion-item.open .accordion-content {
+            max-height: 500px; /* Adjust as needed */
+        }
+        .tooltip {
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .has-tooltip:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <!-- Header & Navigation -->
+    <header id="header" class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-slate-900">
+                🚗 Car Parking App
+            </div>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#features" class="text-slate-600 hover:text-indigo-600 transition-colors">Features</a>
+                <a href="#tech-stack" class="text-slate-600 hover:text-indigo-600 transition-colors">Tech Stack</a>
+                <a href="#getting-started" class="text-slate-600 hover:text-indigo-600 transition-colors">Setup</a>
+                <a href="#contributing" class="text-slate-600 hover:text-indigo-600 transition-colors">Contribute</a>
+            </div>
+            <a href="https://github.com/mellytimes/car-parking-web" target="_blank" class="hidden md:block bg-slate-800 text-white px-4 py-2 rounded-lg hover:bg-slate-900 transition-colors font-semibold">
+                View on GitHub
+            </a>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-8 md:py-16">
+
+        <!-- Hero Section -->
+        <section id="hero" class="text-center py-16 md:py-24">
+            <h1 class="text-4xl md:text-6xl font-bold text-slate-900 mb-4">Car Parking Web Application</h1>
+            <p class="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">
+                A user-friendly, responsive application to find and manage car parking, built with a Python backend and enhanced with smooth scroll animations.
+            </p>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="py-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Project Features</h2>
+                <p class="text-slate-600 mt-2">Click on any feature to learn more.</p>
+            </div>
+            <div id="features-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature cards will be injected here by JS -->
+            </div>
+        </section>
+
+        <!-- Tech Stack Section -->
+        <section id="tech-stack" class="py-16 bg-white rounded-2xl shadow-lg">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Technology Stack</h2>
+                <p class="text-slate-600 mt-2">The core technologies used to build this project. Hover for details.</p>
+            </div>
+            <div id="tech-stack-grid" class="flex flex-wrap justify-center items-center gap-6 px-4">
+                <!-- Tech badges will be injected here by JS -->
+            </div>
+        </section>
+
+        <!-- Getting Started Section -->
+        <section id="getting-started" class="py-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Getting Started</h2>
+                <p class="text-slate-600 mt-2">Follow these steps to get a local copy up and running.</p>
+            </div>
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white p-6 rounded-2xl shadow-lg mb-8">
+                    <h3 class="text-xl font-semibold mb-4 text-slate-800">Prerequisites</h3>
+                    <p>Make sure you have Python installed on your machine. You can download it from <a href="https://www.python.org/downloads/" target="_blank" class="text-indigo-600 hover:underline font-medium">python.org</a>.</p>
+                </div>
+                <div id="accordion-container" class="space-y-4">
+                    <!-- Accordion items will be injected here by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Contributing & License Section -->
+        <section id="contributing" class="py-16">
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div class="bg-white p-8 rounded-2xl shadow-lg">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-4">🤝 How to Contribute</h2>
+                    <p class="text-slate-600 mb-6">Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.</p>
+                    <ol class="list-decimal list-inside space-y-3 text-slate-700">
+                        <li>Fork the Project</li>
+                        <li>Create your Feature Branch (`git checkout -b feature/AmazingFeature`)</li>
+                        <li>Commit your Changes (`git commit -m 'Add some AmazingFeature'`)</li>
+                        <li>Push to the Branch (`git push origin feature/AmazingFeature`)</li>
+                        <li>Open a Pull Request</li>
+                    </ol>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-lg">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-4">📄 License</h2>
+                    <p class="text-slate-600">This project is distributed under the MIT License. You can view the full license for more information on what you can and cannot do with the source code.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2024 Car Parking Web Application. A project by mellytimes.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Data from the README
+            const featuresData = [
+                { title: 'Real-time Availability', icon: '📡', description: 'View available parking spots in real-time to save time and effort.' },
+                { title: 'User Authentication', icon: '🔐', description: 'Secure sign-up and login functionality for a personalized user experience.' },
+                { title: 'Booking System', icon: '📅', description: 'Easily book a parking spot for a specific time, ensuring a space is ready for you.' },
+                { title: 'User Dashboard', icon: '📊', description: 'A personal dashboard for users to view their booking history and manage their profile.' },
+                { title: 'Engaging Animations', icon: '✨', description: 'Uses the AOS library to animate elements as you scroll for a dynamic feel.' },
+                { title: 'Responsive Design', icon: '📱', description: 'The application is fully responsive and works on all devices, from desktops to mobile phones.' }
+            ];
+
+            const techStackData = [
+                { name: 'Python', description: 'Used for all backend server logic and functionality.' },
+                { name: 'HTML/CSS/JS', description: 'For the frontend structure, styling, and interactivity.' },
+                { name: 'AOS Library', description: 'A lightweight library to provide "Animate On Scroll" effects.' },
+                { name: 'Database', description: 'Optional: Specify your database here, e.g., SQLite, PostgreSQL, etc.' }
+            ];
+
+            const gettingStartedData = [
+                {
+                    title: 'Step 1: Clone the Repository',
+                    content: 'Get a local copy of the project files.',
+                    code: 'git clone https://github.com/mellytimes/car-parking-web.git'
+                },
+                {
+                    title: 'Step 2: Navigate to Directory',
+                    content: 'Move into the newly created project folder.',
+                    code: 'cd car-parking-web'
+                },
+                {
+                    title: 'Step 3: Set Up Virtual Environment (Optional)',
+                    content: 'Isolate project dependencies to avoid conflicts. On Windows use `venv\\Scripts\\activate`.',
+                    code: 'python -m venv venv\nsource venv/bin/activate'
+                },
+                {
+                    title: 'Step 4: Install Dependencies (Optional)',
+                    content: 'If a `requirements.txt` file exists, install all necessary Python packages.',
+                    code: 'pip install -r requirements.txt'
+                },
+                {
+                    title: 'Step 5: Run the Application',
+                    content: 'Start the built-in Python web server. The application will be available at http://localhost:8000.',
+                    code: 'python -m http.server'
+                }
+            ];
+
+            // Populate Features
+            const featuresGrid = document.getElementById('features-grid');
+            featuresData.forEach(feature => {
+                const card = document.createElement('div');
+                card.className = 'feature-card bg-white p-6 rounded-2xl shadow-lg cursor-pointer transition-transform transform hover:-translate-y-1';
+                card.innerHTML = `
+                    <div class="flex items-center text-2xl font-bold text-slate-900">
+                        <span class="mr-4 text-3xl">${feature.icon}</span>
+                        <h3>${feature.title}</h3>
+                    </div>
+                    <div class="details text-slate-600 mt-2 pl-12">
+                        <p>${feature.description}</p>
+                    </div>
+                `;
+                featuresGrid.appendChild(card);
+                card.addEventListener('click', () => {
+                    card.classList.toggle('open');
+                });
+            });
+
+            // Populate Tech Stack
+            const techStackGrid = document.getElementById('tech-stack-grid');
+            techStackData.forEach(tech => {
+                const badge = document.createElement('div');
+                badge.className = 'has-tooltip relative';
+                badge.innerHTML = `
+                    <div class="bg-slate-100 text-slate-700 font-medium px-4 py-2 rounded-full cursor-default">${tech.name}</div>
+                    <div class="tooltip absolute bottom-full mb-2 w-48 bg-slate-800 text-white text-xs rounded-lg py-2 px-3 text-center z-10">
+                        ${tech.description}
+                    </div>
+                `;
+                techStackGrid.appendChild(badge);
+            });
+
+            // Populate Getting Started Accordion
+            const accordionContainer = document.getElementById('accordion-container');
+            gettingStartedData.forEach((item, index) => {
+                const accordionItem = document.createElement('div');
+                accordionItem.className = 'accordion-item bg-white rounded-2xl shadow-lg overflow-hidden';
+                accordionItem.innerHTML = `
+                    <div class="accordion-header flex justify-between items-center p-6 cursor-pointer">
+                        <h3 class="text-lg font-semibold text-slate-800">${item.title}</h3>
+                        <span class="text-2xl text-slate-500 transform transition-transform">+</span>
+                    </div>
+                    <div class="accordion-content px-6 pb-6">
+                        <p class="text-slate-600 mb-4">${item.content}</p>
+                        <div class="bg-slate-800 rounded-lg p-4 text-slate-100 font-mono text-sm relative">
+                            <pre><code>${item.code}</code></pre>
+                            <button class="copy-btn absolute top-2 right-2 bg-slate-600 hover:bg-slate-500 text-white px-2 py-1 text-xs rounded-md">Copy</button>
+                        </div>
+                    </div>
+                `;
+                accordionContainer.appendChild(accordionItem);
+
+                const header = accordionItem.querySelector('.accordion-header');
+                const sign = header.querySelector('span');
+                header.addEventListener('click', () => {
+                    accordionItem.classList.toggle('open');
+                    sign.textContent = accordionItem.classList.contains('open') ? '-' : '+';
+                    sign.classList.toggle('rotate-45', accordionItem.classList.contains('open'));
+                });
+
+                const copyBtn = accordionItem.querySelector('.copy-btn');
+                copyBtn.addEventListener('click', () => {
+                    const codeToCopy = item.code;
+                    const tempTextArea = document.createElement('textarea');
+                    tempTextArea.value = codeToCopy;
+                    document.body.appendChild(tempTextArea);
+                    tempTextArea.select();
+                    try {
+                        document.execCommand('copy');
+                        copyBtn.textContent = 'Copied!';
+                        setTimeout(() => { copyBtn.textContent = 'Copy'; }, 2000);
+                    } catch (err) {
+                        console.error('Failed to copy text: ', err);
+                        copyBtn.textContent = 'Error';
+                    }
+                    document.body.removeChild(tempTextArea);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
